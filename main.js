@@ -7,12 +7,26 @@ var app = http.createServer(function(request, response){
     var queryData = url.parse(_url, true).query;
     var title = queryData.id;
     var pathname = url.parse(_url, true).pathname
-    
+
     if(pathname === '/'){
       if(queryData.id === undefined){
-        var title = "WEL COME";
-        var description = "HELLO Node.js"
-        fs.readFile(`data/${queryData.id}`, 'utf-8', function(err, description){
+        fs.readdir('./data', function(error, filelist){
+          console.log(filelist)
+          var title = "WEL COME";
+          var description = "HELLO Node.js"
+
+          // var list = `<li><a href="/?id=HTML">HTML</a></li>
+          // <li><a href="/?id=CSS">CSS</a></li>
+          // <li><a href="/?id=JavaScript">JavaScript</a></li>`
+
+          var list = '<ul>'
+          var i = 0;
+          while(i < filelist.length){
+            list  = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+            i = i + 1;
+          }
+          list = list + '</ul>';
+
           var template = `
           <!doctype html>
           <html>
@@ -22,11 +36,7 @@ var app = http.createServer(function(request, response){
           </head>
           <body>
             <h1><a href="/">WEB</a></h1>
-            <ul>
-              <li><a href="/?id=HTML">HTML</a></li>
-              <li><a href="/?id=CSS">CSS</a></li>
-              <li><a href="/?id=JavaScript">JavaScript</a></li>
-            </ul>
+            ${list}
             <h2>${title}</h2>
             <p>${description}</p>
           </body>
@@ -34,31 +44,45 @@ var app = http.createServer(function(request, response){
           `;
           response.writeHead(200);
           response.end(template); //접속 url에 따라 파일을 정해줌
-        });
+          });
     } else {
-      fs.readFile(`data/${queryData.id}`, 'utf-8', function(err, description){
-        var template = `
-      <!doctype html>
-      <html>
-      <head>
-        <title>WEB1 - ${title}</title>
-        <meta charset="utf-8">
-      </head>
-      <body>
-        <h1><a href="/">WEB</a></h1>
-        <ul>
-          <li><a href="/?id=HTML">HTML</a></li>
-          <li><a href="/?id=CSS">CSS</a></li>
-          <li><a href="/?id=JavaScript">JavaScript</a></li>
-        </ul>
-        <h2>${title}</h2>
-        <p>${description}</p>
-      </body>
-      </html>
-      `;
-      response.writeHead(200);
-      response.end(template); //접속 url에 따라 파일을 정해줌
-      });
+      fs.readdir('./data', function(error, filelist){
+        console.log(filelist)
+        var title = queryData.id;
+
+        // var list = `<li><a href="/?id=HTML">HTML</a></li>
+        // <li><a href="/?id=CSS">CSS</a></li>
+        // <li><a href="/?id=JavaScript">JavaScript</a></li>`
+
+        var list = '<ul>'
+        var i = 0;
+        while(i < filelist.length){
+          list  = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+          i = i + 1;
+        }
+        list = list + '</ul>'
+        fs.readFile(`data/${queryData.id}`, 'utf-8', function(err, description){
+          var template = `
+        <!doctype html>
+        <html>
+        <head>
+          <title>WEB1 - ${title}</title>
+          <meta charset="utf-8">
+        </head>
+        <body>
+          <h1><a href="/">WEB</a></h1>
+          <ul>
+            ${list}
+          </ul>
+          <h2>${title}</h2>
+          <p>${description}</p>
+        </body>
+        </html>
+        `;
+        response.writeHead(200);
+        response.end(template); //접속 url에 따라 파일을 정해줌
+        });
+    });
     }
     }else{
     response.writeHead(404);
