@@ -11,13 +11,9 @@ var app = http.createServer(function(request, response){
     if(pathname === '/'){
       if(queryData.id === undefined){
         fs.readdir('./data', function(error, filelist){
-          console.log(filelist)
+          console.log(filelist) // 파일 리스트 목록으로 출력
           var title = "WEL COME";
           var description = "HELLO Node.js"
-
-          // var list = `<li><a href="/?id=HTML">HTML</a></li>
-          // <li><a href="/?id=CSS">CSS</a></li>
-          // <li><a href="/?id=JavaScript">JavaScript</a></li>`
 
           var list = '<ul>'
           var i = 0;
@@ -34,9 +30,29 @@ var app = http.createServer(function(request, response){
             <title>WEB1 - ${title}</title>
             <meta charset="utf-8">
           </head>
+          <style>
+            ul{
+              background-color: aqua;
+              width: 150px;
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+            }
+            li a{
+                display: block;
+                color: #000000;
+                padding: 8px;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            li a:hover{
+                background-color: blue;
+                color: white;
+            }
+          </style>
           <body>
             <h1><a href="/">WEB</a></h1>
-            ${list}
+                ${list}
             <h2>${title}</h2>
             <p>${description}</p>
           </body>
@@ -69,6 +85,26 @@ var app = http.createServer(function(request, response){
           <title>WEB1 - ${title}</title>
           <meta charset="utf-8">
         </head>
+        <style>
+            ul{
+              background-color: aqua;
+              width: 150px;
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+            }
+            li a{
+                display: block;
+                color: #000000;
+                padding: 8px;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            li a:hover{
+                background-color: blue;
+                color: white;
+            }
+          </style>
         <body>
           <h1><a href="/">WEB</a></h1>
           <ul>
