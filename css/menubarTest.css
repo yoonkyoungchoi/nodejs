@@ -12,7 +12,12 @@ li a{
     text-decoration: none;
     font-weight: bold;
 }
-li a:hover{
-    background-color: violet;
+
+li a.current{
+    background-color: rgb(195, 255, 134);
+    color: white;
+}
+li a:hover:not(.current){
+    background-color: blue;
     color: white;
 }
