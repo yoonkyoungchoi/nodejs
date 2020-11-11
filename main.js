@@ -57,7 +57,7 @@ var app = http.createServer(function(request, response){
           </head>
           <body>
             <h1><a href="/">WEB</a></h1>
-            <a class="current"></a>
+            <class="current">
                 ${list}
             <h2>${title}</h2>
             <p>${description}</p>
@@ -118,7 +118,7 @@ var app = http.createServer(function(request, response){
         </head>
         <body>
           <h1><a href="/">WEB</a></h1>
-          <a class="current"></a>
+          <class="current">
           ${list}
           <h2>${title}</h2>
           <p>${description}</p>
