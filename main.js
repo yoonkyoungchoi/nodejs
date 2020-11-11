@@ -29,10 +29,9 @@ var app = http.createServer(function(request, response){
           <head>
             <title>WEB1 - ${title}</title>
             <meta charset="utf-8">
-          </head>
-          <style>
+            <style>
             ul{
-              background-color: aqua;
+              background-color: rgb(207, 214, 214);
               width: 150px;
               list-style-type: none;
               margin: 0;
@@ -45,13 +44,20 @@ var app = http.createServer(function(request, response){
                 text-decoration: none;
                 font-weight: bold;
             }
-            li a:hover{
+            
+            li a.current{
+                background-color: rgb(195, 255, 134);
+                color: white;
+            }
+            li a:hover:not(.current){
                 background-color: blue;
                 color: white;
             }
           </style>
+          </head>
           <body>
             <h1><a href="/">WEB</a></h1>
+            <a class="current"></a>
                 ${list}
             <h2>${title}</h2>
             <p>${description}</p>
@@ -84,32 +90,36 @@ var app = http.createServer(function(request, response){
         <head>
           <title>WEB1 - ${title}</title>
           <meta charset="utf-8">
+          <style>
+          ul{
+            background-color: rgb(207, 214, 214);
+            width: 150px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+          }
+          li a{
+              display: block;
+              color: #000000;
+              padding: 8px;
+              text-decoration: none;
+              font-weight: bold;
+          }
+          
+          li a.current{
+              background-color: rgb(195, 255, 134);
+              color: white;
+          }
+          li a:hover:not(.current){
+              background-color: blue;
+              color: white;
+          }
+        </style>
         </head>
-        <style>
-            ul{
-              background-color: aqua;
-              width: 150px;
-              list-style-type: none;
-              margin: 0;
-              padding: 0;
-            }
-            li a{
-                display: block;
-                color: #000000;
-                padding: 8px;
-                text-decoration: none;
-                font-weight: bold;
-            }
-            li a:hover{
-                background-color: blue;
-                color: white;
-            }
-          </style>
         <body>
           <h1><a href="/">WEB</a></h1>
-          <ul>
-            ${list}
-          </ul>
+          <a class="current"></a>
+          ${list}
           <h2>${title}</h2>
           <p>${description}</p>
         </body>
